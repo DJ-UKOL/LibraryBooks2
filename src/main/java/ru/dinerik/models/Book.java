@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Book")
@@ -29,6 +30,10 @@ public class Book {
     @Range(min = 1500, max = 2022, message = "Год издания книги должен быть больше чем 1500 и в правильном формате (2022")
     @Column(name = "year")
     private int year;
+
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    @ManyToOne
+    private Person owner;
 
     public Book() {
     }
@@ -69,6 +74,36 @@ public class Book {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public Person getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Person owner) {
+        this.owner = owner;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        if (id != book.id) return false;
+        if (year != book.year) return false;
+        if (!Objects.equals(title, book.title)) return false;
+        return Objects.equals(author, book.author);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + year;
+        return result;
     }
 
     @Override

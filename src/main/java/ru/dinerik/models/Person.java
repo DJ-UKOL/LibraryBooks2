@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 
 @Entity // Указывает, что данный бин (класс) является сущностью.
 @Table(name = "Person") // Указывает, что данный бин (класс) является сущностью.
@@ -25,6 +27,9 @@ public class Person {
     @Min(value = 1900, message = "Год рождения должен быть не меньше 1900")
     @Column(name = "year_of_birth")
     private int yearOfBirth;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
 
     // Конструктор по умолчанию нужен для Spring
     public Person() {}
@@ -56,6 +61,34 @@ public class Person {
 
     public void setYearOfBirth(int yearOfBirth) {
         this.yearOfBirth = yearOfBirth;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (id != person.id) return false;
+        if (yearOfBirth != person.yearOfBirth) return false;
+        return Objects.equals(fullName, person.fullName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
+        result = 31 * result + yearOfBirth;
+        return result;
     }
 
     @Override
