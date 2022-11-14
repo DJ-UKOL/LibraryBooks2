@@ -2,6 +2,7 @@ package ru.dinerik.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dinerik.models.Book;
@@ -23,14 +24,29 @@ public class BookService {
         this.booksRepository = booksRepository;
         this.peopleRepository = peopleRepository;
     }
-    @Transactional
+/*    @Transactional
     public List<Book> findAll() {
         return booksRepository.findAll();
-    }
+    }*/
 
     @Transactional
-    public List<Book> findAll(int page, int booksPerPage) {
-        return booksRepository.findAll(PageRequest.of(page, booksPerPage)).getContent();
+    public List<Book> findAll(Optional<Integer> page, Optional<Integer> booksPerPage, Optional<Boolean> sortByYear) {
+
+        if(sortByYear.isPresent()) {
+            if(sortByYear.get()) {
+                if(page.isPresent() && booksPerPage.isPresent()) {
+                    return booksRepository.findAll(PageRequest.of(page.get(), booksPerPage.get(), Sort.by("year"))).getContent();
+                }
+                return booksRepository.findAll(Sort.by("year"));
+            }
+            if(page.isPresent() && booksPerPage.isPresent()) {
+                return booksRepository.findAll(PageRequest.of(page.get(), booksPerPage.get())).getContent();
+            }
+        }
+        if(page.isPresent() && booksPerPage.isPresent()) {
+            return booksRepository.findAll(PageRequest.of(page.get(), booksPerPage.get())).getContent();
+        }
+        return booksRepository.findAll();
     }
 
     @Transactional
