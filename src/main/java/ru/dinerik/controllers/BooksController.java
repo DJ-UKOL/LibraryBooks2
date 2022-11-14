@@ -25,8 +25,20 @@ public class BooksController {
         this.peopleService = peopleService;
     }
 
-    @GetMapping()
+/*    @GetMapping()
     public String index(Model model) {
+        model.addAttribute("books", bookService.findAll());
+        return "books/index";
+    }*/
+
+    // http://localhost:8080/books?page=1&booksPerPage=3
+    @GetMapping()
+    public String index(@RequestParam("page") Optional<Integer> page, @RequestParam("booksPerPage") Optional<Integer> booksPerPage, Model model) {
+        if(page.isPresent() && booksPerPage.isPresent()) {
+            model.addAttribute("books", bookService.findAll(page.get(), booksPerPage.get()));
+            System.out.println(page + " " + booksPerPage);
+            return "books/index";
+        }
         model.addAttribute("books", bookService.findAll());
         return "books/index";
     }

@@ -1,6 +1,7 @@
 package ru.dinerik.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dinerik.models.Book;
@@ -9,7 +10,6 @@ import ru.dinerik.repositories.BooksRepository;
 import ru.dinerik.repositories.PeopleRepository;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 // Бизнес логика
 @Service
@@ -26,6 +26,11 @@ public class BookService {
     @Transactional
     public List<Book> findAll() {
         return booksRepository.findAll();
+    }
+
+    @Transactional
+    public List<Book> findAll(int page, int booksPerPage) {
+        return booksRepository.findAll(PageRequest.of(page, booksPerPage)).getContent();
     }
 
     @Transactional
