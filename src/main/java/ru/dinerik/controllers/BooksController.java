@@ -1,5 +1,4 @@
 package ru.dinerik.controllers;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +8,6 @@ import ru.dinerik.models.Book;
 import ru.dinerik.models.Person;
 import ru.dinerik.services.BookService;
 import ru.dinerik.services.PeopleService;
-
 import java.util.Optional;
 
 @Controller
@@ -99,5 +97,18 @@ public class BooksController {
         // У selectedPerson назначено только поле id, остальные поля - null
         bookService.assign(id, selectedPerson);
         return "redirect:/books/" + id;
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("search_book") Optional<String> searchBook, Model model) {
+        //model.addAttribute("search_book", searchBook);
+        if(searchBook.isPresent()) {
+            model.addAttribute("books", bookService.search(searchBook.get()));
+            return "books/search";
+        }
+/*        if(searchBook.isPresent() && bookService.search(searchBook.get()).isPresent()) {
+            return "redirect:/books/" + bookService.search(searchBook.get()).get();
+        }*/
+        return "books/search";
     }
 }

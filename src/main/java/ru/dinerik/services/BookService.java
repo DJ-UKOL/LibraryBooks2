@@ -93,4 +93,20 @@ public class BookService {
     public void release(int id) {
         booksRepository.findById(id).get().setOwner(null);
     }
+
+    @Transactional
+    public List<Book> search(String s) {
+        return booksRepository.findAll().stream().filter(title -> title.getTitle().startsWith(s)).toList();
+    }
+
+/*    @Transactional
+    public Optional<Integer> search(String s) {
+        List<Book> listBook = booksRepository.findAll().stream().toList();
+        for (Book book : listBook) {
+            if(book.getTitle().startsWith(s)) {
+                return Optional.of(book.getId());
+            }
+        }
+        return Optional.empty();
+    }*/
 }
