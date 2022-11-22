@@ -100,15 +100,14 @@ public class BooksController {
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam("search_book") Optional<String> searchBook, Model model) {
-        //model.addAttribute("search_book", searchBook);
-        if(searchBook.isPresent()) {
+    public String search(@RequestParam(name = "search_book") Optional<String> searchBook, Model model) {
+        if(searchBook.isPresent() && !searchBook.get().equals("")) {
             model.addAttribute("books", bookService.search(searchBook.get()));
             return "books/search";
         }
-/*        if(searchBook.isPresent() && bookService.search(searchBook.get()).isPresent()) {
-            return "redirect:/books/" + bookService.search(searchBook.get()).get();
-        }*/
+        else {
+            model.addAttribute("books", "");
+        }
         return "books/search";
     }
 }

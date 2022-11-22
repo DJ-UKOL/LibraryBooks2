@@ -96,7 +96,11 @@ public class BookService {
 
     @Transactional
     public List<Book> search(String s) {
-        return booksRepository.findAll().stream().filter(title -> title.getTitle().startsWith(s)).toList();
+        List<Book> listBook  = booksRepository.findAll().stream().filter(title -> title.getTitle().startsWith(s)).toList();
+        if(listBook.isEmpty()) {
+            return null;
+        }
+        return listBook;
     }
 
 /*    @Transactional

@@ -9,11 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dfd36249-56be-4d5d-9c99-8561c20b145e" name="Changes" comment="Add sort. It works!">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/search.html" afterDir="false" />
+    <list default="true" id="dfd36249-56be-4d5d-9c99-8561c20b145e" name="Changes" comment="Add search. It works!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/dinerik/controllers/BooksController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dinerik/controllers/BooksController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/dinerik/services/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dinerik/services/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/search.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,7 +200,10 @@
       <updated>1668086697065</updated>
       <workItem from="1668086697455" duration="26934000" />
       <workItem from="1668508082669" duration="2893000" />
-      <workItem from="1668516831553" duration="30331000" />
+      <workItem from="1668516831553" duration="45007000" />
+      <workItem from="1669000794793" duration="168000" />
+      <workItem from="1669001152389" duration="1903000" />
+      <workItem from="1669035856056" duration="19506000" />
     </task>
     <task id="LOCAL-00002" summary="Add pagination. It works!">
       <created>1668410871299</created>
@@ -216,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668437418972</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add search. It works!">
+      <created>1668613085187</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1668613085187</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,6 +259,7 @@
     <MESSAGE value="Added new files for the project structure." />
     <MESSAGE value="Add pagination. It works!" />
     <MESSAGE value="Add sort. It works!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add sort. It works!" />
+    <MESSAGE value="Add search. It works!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add search. It works!" />
   </component>
 </project>
