@@ -18,8 +18,10 @@
   <br/>
   <table th:each="book : ${books}">
     <tr>
-      <a th:href="@{/books/{id}(id=${book.getId()})}"
-         th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear()}">text</a>
+        <a th:if="${book.isExpiration()}" th:style="'color:red'" th:href="@{/books/{id}(id=${book.getId()})}"
+           th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear()}">text</a>
+        <a th:unless="${book.isExpiration()}" th:href="@{/books/{id}(id=${book.getId()})}"
+           th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear()}">text</a>
     </tr>
   </table>
   <hr>

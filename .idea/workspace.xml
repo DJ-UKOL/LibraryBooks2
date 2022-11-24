@@ -9,11 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dfd36249-56be-4d5d-9c99-8561c20b145e" name="Changes" comment="Add search. It works!">
+    <list default="true" id="dfd36249-56be-4d5d-9c99-8561c20b145e" name="Changes" comment="Changed search. It works better!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dinerik/controllers/BooksController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dinerik/controllers/BooksController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dinerik/controllers/PeopleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dinerik/controllers/PeopleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/dinerik/models/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dinerik/models/Book.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/dinerik/services/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/dinerik/services/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/people/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/people/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,7 +204,7 @@
       <workItem from="1668516831553" duration="45007000" />
       <workItem from="1669000794793" duration="168000" />
       <workItem from="1669001152389" duration="1903000" />
-      <workItem from="1669035856056" duration="19506000" />
+      <workItem from="1669035856056" duration="52546000" />
     </task>
     <task id="LOCAL-00002" summary="Add pagination. It works!">
       <created>1668410871299</created>
@@ -226,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668613085187</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Changed search. It works better!">
+      <created>1669120692615</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1669120692615</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,6 +268,23 @@
     <MESSAGE value="Add pagination. It works!" />
     <MESSAGE value="Add sort. It works!" />
     <MESSAGE value="Add search. It works!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add search. It works!" />
+    <MESSAGE value="Changed search. It works better!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed search. It works better!" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ru/dinerik/models/Book.java</url>
+          <line>104</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ru/dinerik/models/Book.java</url>
+          <line>108</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

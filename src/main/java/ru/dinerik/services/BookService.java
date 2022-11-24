@@ -1,5 +1,6 @@
 package ru.dinerik.services;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -10,7 +11,11 @@ import ru.dinerik.models.Person;
 import ru.dinerik.repositories.BooksRepository;
 import ru.dinerik.repositories.PeopleRepository;
 
+import java.time.LocalDate;
 import java.util.*;
+
+import static java.time.temporal.ChronoUnit.DAYS;
+
 
 // Бизнес логика
 @Service
@@ -56,8 +61,26 @@ public class BookService {
     }
     @Transactional
     public List<Book> findBooksByOwnerId(int id) {
-       return booksRepository.findAll().stream().filter(book -> Optional.ofNullable(book.getOwner()).equals(peopleRepository.findById(id))).toList();
-
+        Optional<Person> person = peopleRepository.findById(id);
+        if(person.isPresent()) {
+            Hibernate.initialize(person.get().getBooks());
+            // Просрочка книги
+            // Находим все книги по id владельца, по каждой книге узнаем дату взятия книги, если она больше 10 дней то сделаем
+            // поле expiration ture
+            List<Book> bookList = person.get().getBooks();
+            LocalDate nowDate = LocalDate.now();
+            for(Book book : bookList) {
+                if(book.getDate() != null) {
+                    if(DAYS.between(book.getDate(), nowDate) >= 10) {
+                        book.setExpiration(true);
+                    }
+                } else {
+                    book.setExpiration(false);
+                }
+            }
+            return bookList;
+        }
+        return Collections.emptyList();
     }
     @Transactional
     public Optional<Person> findOwnerById(int id) {
@@ -84,33 +107,31 @@ public class BookService {
     // Назначает книгу человеку (этот метод вызывается, когда человек забирает книгу из библиотеки)
     @Transactional
     public void assign(int id, Person selectedPerson) {
-        booksRepository.findById(id).get().setOwner(selectedPerson);
+        Optional<Book> book = booksRepository.findById(id);
+        if(book.isPresent()) {
+            book.get().setOwner(selectedPerson);
+            book.get().setDate(LocalDate.now());
+        }
     }
 
     // Освобождаем книгу (этот метод вызывается, когда человек оставляет книгу в библиотеке)
     // Нужно в поле person_id таблицы book сделать null
     @Transactional
     public void release(int id) {
-        booksRepository.findById(id).get().setOwner(null);
+        Optional<Book> book = booksRepository.findById(id);
+        if(book.isPresent()) {
+            book.get().setOwner(null);
+            book.get().setDate(null);
+        }
     }
 
     @Transactional
     public List<Book> search(String s) {
-        List<Book> listBook  = booksRepository.findAll().stream().filter(title -> title.getTitle().startsWith(s)).toList();
-        if(listBook.isEmpty()) {
+        List<Book> listBook = booksRepository.findAll().stream().filter(title -> title.getTitle().startsWith(s)).toList();
+        if (listBook.isEmpty()) {
             return null;
         }
         return listBook;
     }
 
-/*    @Transactional
-    public Optional<Integer> search(String s) {
-        List<Book> listBook = booksRepository.findAll().stream().toList();
-        for (Book book : listBook) {
-            if(book.getTitle().startsWith(s)) {
-                return Optional.of(book.getId());
-            }
-        }
-        return Optional.empty();
-    }*/
 }

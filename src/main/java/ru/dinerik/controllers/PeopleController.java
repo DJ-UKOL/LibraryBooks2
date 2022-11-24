@@ -30,6 +30,7 @@ public class PeopleController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
+        //bookService.expirationTrue(id);
         model.addAttribute("person", peopleService.findOne(id));
         model.addAttribute("books", bookService.findBooksByOwnerId(id));
         return "people/show";

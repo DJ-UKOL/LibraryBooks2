@@ -3,8 +3,10 @@ package ru.dinerik.models;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -34,6 +36,13 @@ public class Book {
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     @ManyToOne
     private Person owner;
+
+    @Column(name = "date")
+    @DateTimeFormat
+    private LocalDate date;
+
+    @Transient
+    private boolean expiration;
 
     public Book() {
     }
@@ -82,6 +91,22 @@ public class Book {
 
     public void setOwner(Person owner) {
         this.owner = owner;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public boolean isExpiration() {
+        return expiration;
+    }
+
+    public void setExpiration(boolean expiration) {
+        this.expiration = expiration;
     }
 
     @Override
